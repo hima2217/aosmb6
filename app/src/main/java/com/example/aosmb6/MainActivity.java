@@ -5,6 +5,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     private final String CHANNEL_ID = "channel_id";
+
 
     private void showNotification() {
         NotificationCompat.Builder builder = new
@@ -38,10 +40,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("description");
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "kanal", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("info");
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+
+        Intent intent = new Intent(this, Serv1.class);
+        startService(intent);
+        stopService(intent);
     }
 }
